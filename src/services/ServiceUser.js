@@ -1,6 +1,6 @@
 import axios from "axios";
 import Global from './../Global';
-
+import Cookies from "js-cookie";
 export default class ServiceUser {
     obtenerToken(user) {
         var json = JSON.stringify(user);
@@ -15,6 +15,15 @@ export default class ServiceUser {
                 resolve(response.data)
             })
         })
+    }
+    // Cookies
+    //guardar usuario
+    setUserLogged(userLogged) {
+        Cookies.set("userLogged", userLogged);
+    }
+    //recuperar usuario
+    getUserLogged() {
+        return Cookies.get("userLogged");
     }
 
     getEmpleados(){

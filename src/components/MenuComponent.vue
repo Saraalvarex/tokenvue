@@ -10,6 +10,10 @@
         <li class="nav-item">
           <router-link class="nav-link" to="/home">Home/Empleados</router-link>
         </li>
+        <li class="nav-item" v-if="this.usuario">
+          <h style="color: green" >Usuario logueado</h>
+          <button class="btn btn-outline-warning" @click="cerrarSesion()">Cerrar sesión</button>
+        </li>
         <!-- <li class="nav-item">
           <a class="nav-link" href="/detallesempleados/:id">Empleados</a>
         </li> -->
@@ -42,11 +46,14 @@ export default {
  name: 'MenuComponent',
  data() {
  return {
-   empleados: []
+   empleados: [],
+   usuario: null
  };
  },
  methods: {
-
+    cerrarSesion(){
+        service.deleteUser()
+    }
  },
  mounted(){
    service.getEmpleados().then(resu=>{

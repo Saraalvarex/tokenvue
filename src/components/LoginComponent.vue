@@ -1,6 +1,5 @@
 <template>
-<h3 style="color: green" v-if="userLogged">Usuario logueado</h3>
-<div class="d-flex justify-content-center align-items-center" v-else>
+<div class="d-flex justify-content-center align-items-center">
     <div class="col-md-4 p-5 shadow-sm border rounded-5 border-primary">
         <h2 class="text-center mb-4 text-primary">Login Form</h2>
         <form method="post" v-on:submit.prevent="login()">
@@ -14,6 +13,7 @@
             </div>
             <div class="d-grid">
                 <button class="btn btn-primary" type="submit">Login</button>
+               
             </div>
         </form>
         <!-- <div class="mt-3">
@@ -36,25 +36,25 @@ export default {
         "password": ""
     },
     token: "",
-    userLogged : {
-        "userName": "",
-        "password": ""
-    }
+    status: false
  };
  },
- mounted(){
-
- },
+ computed: {
+    // userLogged() {
+    //   return service.getUserLogged();
+    // }
+  },
  methods: {
     login(){
         service.obtenerToken(this.user).then(result=> {
         try {
             this.token=result;
+            this.status=true;
             localStorage.setItem('token', result.response);
-            service.setUserLogged(this.user);
+            // service.setUserLogged(this.user);
             console.log(localStorage)
             this.$router.push("/home");
-            this.userLogged = service.getUserLogged()
+            // service.getUserLogged()
             console.log(this.userLogged)
         } catch (error) {
             console.log(error);

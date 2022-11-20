@@ -36,8 +36,10 @@ export default {
         "password": ""
     },
     token: "",
-    error: false,
-    userLogged : service.getUserLogged()
+    userLogged : {
+        "userName": "",
+        "password": ""
+    }
  };
  },
  mounted(){
@@ -52,6 +54,8 @@ export default {
             service.setUserLogged(this.user);
             console.log(localStorage)
             this.$router.push("/home");
+            this.userLogged = service.getUserLogged()
+            console.log(this.userLogged)
         } catch (error) {
             console.log(error);
             this.error = true;
